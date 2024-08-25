@@ -3,10 +3,12 @@ package net.twinges.staff.handlers;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import java.nio.file.attribute.UserPrincipal;
@@ -102,9 +104,21 @@ public class StaffModeHandler {
             }
         }
         int rows = (staffmembers + 8) / 9;
-        Inventory GUI = Bukkit.createInventory(null, rows * 9, "Online Staff GUI");
+        Inventory gui = Bukkit.createInventory(null, rows * 9, "Online Staff GUI");
         int slot = 0;
-        for (Player player : )
+        for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
+            if (onlinePlayers.hasPermission("tstaff.staff")) {
+                ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
+                SkullMeta skullMeta = (SkullMeta) playerHead.getItemMeta();
+                if (skullMeta != null) {
+                    skullMeta.setDisplayName(onlinePlayers.getDisplayName());
+                    skullMeta.setOwner(onlinePlayers.getName());
+                    playerHead.setItemMeta(skullMeta);
+                }
+                gui.setItem(slot++, playerHead);
+            }
+        }
+        player.openInventory(gui);
     }
 
 
