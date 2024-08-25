@@ -7,8 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 
 public class ItemListeners implements Listener {
 
@@ -53,6 +55,21 @@ public class ItemListeners implements Listener {
                     event.setCancelled(true);
                 }
             }
+        }
+    }
+
+    @EventHandler
+    public void onICE(InventoryClickEvent event) {
+        Inventory inventory = event.getInventory();
+        String inventoryTitle = inventory.getTitle();
+
+        //Debug #1
+        System.out.println("Clicked inventory " + inventoryTitle);
+
+        if (inventoryTitle.equals("Online Staff GUI")) {
+            //Debug #2
+            System.out.println("Preventing interaction.");
+            event.setCancelled(true);
         }
     }
 }
