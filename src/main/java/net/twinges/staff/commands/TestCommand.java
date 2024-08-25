@@ -20,7 +20,7 @@ public class TestCommand {
         }
 
     }
-    @Command(names = "test2", permission = "jstaff.test2")
+    @Command(names = "test2", permission = "")
     public static void test2(Player player) {
         jStaff.getInstance().getStaffModeHandler().openStaffGUI(player);
     }
