@@ -18,12 +18,14 @@ public class StaffModeHandler {
     public HashMap<UUID, ItemStack[]> invArmor;
     public HashMap<UUID, ItemStack[]> inv;
     private jStaff plugin;
+    public List<Player> vanishList;
 
 
     public StaffModeHandler(jStaff plugin) {
         this.plugin = plugin;
         inv = new HashMap<>();
         invArmor = new HashMap<>();
+        vanishList = new ArrayList<>();
     }
 
 
@@ -32,12 +34,14 @@ public class StaffModeHandler {
     }
 
     public boolean isVanished(Player player) {
-        return player.hasMetadata("mod");
+        return vanishList.contains(player);
+//        return player.hasMetadata("mod");
     }
 
     public void putInStaffMode(Player player) {
         PlayerInventory playerInventory = player.getInventory();
         player.setMetadata("mod", new FixedMetadataValue(plugin, player));
+        vanishList.add(player);
 
         invArmor.put(player.getUniqueId(), playerInventory.getArmorContents());
         inv.put(player.getUniqueId(), playerInventory.getContents());
@@ -69,6 +73,7 @@ public class StaffModeHandler {
         inv.remove(player.getUniqueId());
         player.updateInventory();
         player.removeMetadata("mod", jStaff.getInstance());
+        vanishList.remove(player);
 
     }
 
@@ -78,7 +83,8 @@ public class StaffModeHandler {
                 player.hidePlayer(players);
             }
         }
-        player.setMetadata("invisible", new FixedMetadataValue(plugin, player));
+        vanishList.add(player);
+//        player.setMetadata("invisible", new FixedMetadataValue(plugin, player));
     }
 
     public void removeVanish(Player player) {
@@ -87,7 +93,8 @@ public class StaffModeHandler {
                 player.showPlayer(players);
             }
         }
-        player.removeMetadata("mod", plugin);
+        vanishList.remove(player);
+//        player.removeMetadata("mod", plugin);
     }
 
     public Player getRandomPvP() {
