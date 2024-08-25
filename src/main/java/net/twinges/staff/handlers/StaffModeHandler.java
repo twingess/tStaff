@@ -1,0 +1,113 @@
+package net.twinges.staff.handlers;
+
+import net.twinges.staff.jStaff;
+import net.twinges.staff.util.CC;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.metadata.FixedMetadataValue;
+
+import java.nio.file.attribute.UserPrincipal;
+import java.util.*;
+
+public class StaffModeHandler {
+
+    public HashMap<UUID, ItemStack[]> invArmor = new HashMap<>();
+    public HashMap<UUID, ItemStack[]> inv = new HashMap<>();
+
+    public boolean isInStaffMode(Player player) {
+        return player.hasMetadata("mod");
+    }
+
+    public boolean isVanished(Player player) {
+        return player.hasMetadata("mod");
+    }
+
+    public void putInStaffMode(Player player) {
+        PlayerInventory playerInventory = player.getInventory();
+
+        invArmor.put(player.getUniqueId(), playerInventory.getArmorContents());
+        inv.put(player.getUniqueId(), playerInventory.getContents());
+
+        playerInventory.clear();
+        playerInventory.setArmorContents(null);
+
+
+        playerInventory.setItem(0, jStaff.getInstance().getItemHandler().getCompass());
+        if (player.isOp()) {
+            playerInventory.setItem(2, jStaff.getInstance().getItemHandler().getWand());
+            playerInventory.setItem(3, jStaff.getInstance().getItemHandler().getBetterView());
+        } else {
+            playerInventory.setItem(2, jStaff.getInstance().getItemHandler().getBetterView());
+        }
+        playerInventory.setItem(1, jStaff.getInstance().getItemHandler().getInspectBook());
+        playerInventory.setItem(7, jStaff.getInstance().getItemHandler().getStaffGUI());
+        playerInventory.setItem(8, jStaff.getInstance().getItemHandler().getRandomTeleport());
+
+        player.setMetadata("mod", new FixedMetadataValue(jStaff.getInstance(), player));
+    }
+
+    public void removeStaffMode(Player player) {
+
+        PlayerInventory playerInventory = player.getInventory();
+
+        playerInventory.setContents(inv.get(player.getUniqueId()));
+        playerInventory.setArmorContents(invArmor.get(player.getUniqueId()));
+        invArmor.remove(player.getUniqueId());
+        inv.remove(player.getUniqueId());
+        player.removeMetadata("mod", jStaff.getInstance());
+
+    }
+
+    public void setVanished(Player player) {
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            if (!players.hasPermission("tstaff.staff")) {
+                player.hidePlayer(players);
+            }
+        }
+        player.setMetadata("invisible", new FixedMetadataValue(jStaff.getInstance(), player));
+    }
+
+    public void removeVanish(Player player) {
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            if (!players.hasPermission("tstaff.staff")) {
+                player.showPlayer(players);
+            }
+        }
+        player.removeMetadata("mod", jStaff.getInstance());
+    }
+
+    public Player getRandomPvP() {
+        Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[0]);
+        Random random = new Random();
+        Player pvpPlayer = null;
+
+        for (Player player : players) {
+            if (player.getWorld().getPVP() || player.getLastDamage() > 0) {
+                if (random.nextInt(players.length) < 1) {
+                    pvpPlayer = player;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void openStaffGUI(Player player) {
+        int staffmembers = 0;
+        for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
+            if (onlinePlayers.hasPermission("tstaff.staff")) {
+                staffmembers++;
+            }
+        }
+        int rows = (staffmembers + 8) / 9;
+        Inventory GUI = Bukkit.createInventory(null, rows * 9, "Online Staff GUI");
+        int slot = 0;
+        for (Player player : )
+    }
+
+
+
+
+}

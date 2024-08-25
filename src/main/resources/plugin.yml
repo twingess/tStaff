@@ -1,0 +1,5 @@
+name: tStaff
+version: 1.0
+author: Twinges
+main: net.twinges.staff.jStaff
+softdepend: [ qLib ]
