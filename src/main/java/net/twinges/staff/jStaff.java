@@ -20,6 +20,7 @@ public class jStaff extends JavaPlugin {
     public void onEnable() {
         instance = this;
         registerHandlers();
+        registerListeners();
         FrozenCommandHandler.registerAll(this);
         System.out.println(CC.translate("&6jStaff &ahas been enabled."));
     }
@@ -30,7 +31,7 @@ public class jStaff extends JavaPlugin {
     }
 
     private void registerHandlers(){
-        staffModeHandler = new StaffModeHandler();
+        staffModeHandler = new StaffModeHandler(this);
         itemHandler = new ItemHandler();
     }
     private void registerListeners() {
