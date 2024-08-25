@@ -4,10 +4,12 @@ import lombok.Getter;
 import net.frozenorb.qlib.command.FrozenCommandHandler;
 import net.twinges.staff.handlers.ItemHandler;
 import net.twinges.staff.handlers.StaffModeHandler;
+import net.twinges.staff.listeners.ItemListeners;
 import net.twinges.staff.listeners.StaffListeners;
 import net.twinges.staff.util.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.json.simple.ItemList;
 
 public class jStaff extends JavaPlugin {
 
@@ -36,5 +38,6 @@ public class jStaff extends JavaPlugin {
     }
     private void registerListeners() {
         Bukkit.getServer().getPluginManager().registerEvents(new StaffListeners(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new ItemListeners(), this);
     }
 }
