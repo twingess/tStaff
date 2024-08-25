@@ -33,7 +33,7 @@ public class ItemListeners implements Listener {
                     }
                 }
                 if (player.getItemInHand().isSimilar(jStaff.getInstance().getItemHandler().getStaffGUI())) {
-
+                    jStaff.getInstance().getStaffModeHandler().openStaffGUI(player);
                 }
             }
         }
