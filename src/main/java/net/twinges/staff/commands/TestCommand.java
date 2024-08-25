@@ -22,12 +22,6 @@ public class TestCommand {
     }
     @Command(names = "test2", permission = "jstaff.test2")
     public static void test2(Player player) {
-        if(jStaff.getInstance().getStaffModeHandler().isVanished(player)) {
-            player.sendMessage(CC.translate("&aYou are vanished!"));
-        }
-
-        if (!jStaff.getInstance().getStaffModeHandler().isVanished(player)) {
-            player.sendMessage(CC.translate("&cYou are not vanished!"));
-        }
+        jStaff.getInstance().getStaffModeHandler().openStaffGUI(player);
     }
 }
