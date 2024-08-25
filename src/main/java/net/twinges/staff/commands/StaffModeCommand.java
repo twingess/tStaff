@@ -17,11 +17,9 @@ public class StaffModeCommand {
     public static void staffModeCommand(Player player) {
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             jStaff.getInstance().getStaffModeHandler().removeStaffMode(player);
-            jStaff.getInstance().getStaffModeHandler().removeVanish(player);
             player.sendMessage(CC.translate("&cYou have disabled mod mode."));
         } else {
             jStaff.getInstance().getStaffModeHandler().putInStaffMode(player);
-            jStaff.getInstance().getStaffModeHandler().setVanished(player);
             player.sendMessage(CC.translate("&aYou have enabled mod mode."));
         }
 
