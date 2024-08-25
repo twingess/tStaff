@@ -11,13 +11,21 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.*;
 
 public class StaffModeHandler {
 
-    public HashMap<UUID, ItemStack[]> invArmor = new HashMap<>();
-    public HashMap<UUID, ItemStack[]> inv = new HashMap<>();
+    public HashMap<UUID, ItemStack[]> invArmor;
+    public HashMap<UUID, ItemStack[]> inv;
+    private jStaff plugin;
+
+
+    public StaffModeHandler(jStaff plugin) {
+        this.plugin = plugin;
+        inv = new HashMap<>();
+        invArmor = new HashMap<>();
+    }
+
 
     public boolean isInStaffMode(Player player) {
         return player.hasMetadata("mod");
@@ -29,6 +37,7 @@ public class StaffModeHandler {
 
     public void putInStaffMode(Player player) {
         PlayerInventory playerInventory = player.getInventory();
+        player.setMetadata("mod", new FixedMetadataValue(plugin, player));
 
         invArmor.put(player.getUniqueId(), playerInventory.getArmorContents());
         inv.put(player.getUniqueId(), playerInventory.getContents());
@@ -48,7 +57,6 @@ public class StaffModeHandler {
         playerInventory.setItem(7, jStaff.getInstance().getItemHandler().getStaffGUI());
         playerInventory.setItem(8, jStaff.getInstance().getItemHandler().getRandomTeleport());
 
-        player.setMetadata("mod", new FixedMetadataValue(jStaff.getInstance(), player));
     }
 
     public void removeStaffMode(Player player) {
@@ -59,6 +67,7 @@ public class StaffModeHandler {
         playerInventory.setArmorContents(invArmor.get(player.getUniqueId()));
         invArmor.remove(player.getUniqueId());
         inv.remove(player.getUniqueId());
+        player.updateInventory();
         player.removeMetadata("mod", jStaff.getInstance());
 
     }
@@ -69,7 +78,7 @@ public class StaffModeHandler {
                 player.hidePlayer(players);
             }
         }
-        player.setMetadata("invisible", new FixedMetadataValue(jStaff.getInstance(), player));
+        player.setMetadata("invisible", new FixedMetadataValue(plugin, player));
     }
 
     public void removeVanish(Player player) {
@@ -78,7 +87,7 @@ public class StaffModeHandler {
                 player.showPlayer(players);
             }
         }
-        player.removeMetadata("mod", jStaff.getInstance());
+        player.removeMetadata("mod", plugin);
     }
 
     public Player getRandomPvP() {
@@ -112,6 +121,10 @@ public class StaffModeHandler {
                 SkullMeta skullMeta = (SkullMeta) playerHead.getItemMeta();
                 if (skullMeta != null) {
                     skullMeta.setDisplayName(onlinePlayers.getDisplayName());
+                    List<String> lore = new ArrayList<>();
+                    lore.add(CC.translate("&fVanish: " + (jStaff.getInstance().getStaffModeHandler().isVanished(onlinePlayers) ? "&aYes" : "&cNo")));
+                    lore.add(CC.translate("&fStaff Mode: " + (jStaff.getInstance().getStaffModeHandler().isInStaffMode(onlinePlayers) ? "&aYes" : "&cNo")));
+                    skullMeta.setLore(lore);
                     skullMeta.setOwner(onlinePlayers.getName());
                     playerHead.setItemMeta(skullMeta);
                 }
@@ -120,8 +133,4 @@ public class StaffModeHandler {
         }
         player.openInventory(gui);
     }
-
-
-
-
 }
