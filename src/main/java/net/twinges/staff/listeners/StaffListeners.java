@@ -15,7 +15,7 @@ public class StaffListeners implements Listener {
 
 
     @EventHandler
-    public static void onBBE(BlockBreakEvent event) {
+    public void onBBE(BlockBreakEvent event) {
         Player player = event.getPlayer();
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             if (jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) return;
@@ -25,7 +25,7 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onBPE(BlockPlaceEvent event) {
+    public void onBPE(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             if (jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) return;
