@@ -9,6 +9,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 
 public class StaffListeners implements Listener {
 
@@ -40,6 +41,14 @@ public class StaffListeners implements Listener {
                 if (player.hasPermission("tstaff.admin")) return;
                 event.setCancelled(true);
             }
+        }
+    }
+
+    @EventHandler
+    public static void onPGMCE(PlayerGameModeChangeEvent event) {
+        Player player = event.getPlayer();
+        if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
+            event.setCancelled(true);
         }
     }
 }
