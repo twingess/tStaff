@@ -3,13 +3,8 @@ package net.twinges.staff.commands;
 import net.frozenorb.qlib.command.Command;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.HashMap;
 
 public class StaffModeCommand {
 
