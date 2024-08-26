@@ -9,10 +9,7 @@ import net.twinges.staff.listeners.StaffListeners;
 import net.twinges.staff.util.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.json.simple.ItemList;
-import sun.util.logging.PlatformLogger;
 
-import java.util.logging.Level;
 
 public class jStaff extends JavaPlugin {
 
