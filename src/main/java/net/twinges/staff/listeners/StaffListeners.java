@@ -7,13 +7,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 
 public class StaffListeners implements Listener {
 
 
 
     @EventHandler
-    public static void onBlockBreakEvent(BlockBreakEvent event) {
+    public static void onBBE(BlockBreakEvent event) {
         Player player = event.getPlayer();
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             event.setCancelled(true);
@@ -22,11 +24,22 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onBlockPlaceEvent(BlockPlaceEvent event) {
+    public static void onBPE(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             event.setCancelled(true);
             player.sendMessage(CC.translate("&cYou cannot place blocks while in staff mode."));
+        }
+    }
+
+    @EventHandler
+    public static void onICE(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        if (event.getWhoClicked() instanceof Player) {
+            if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
+                if (player.hasPermission("tstaff.admin")) return;
+                event.setCancelled(true);
+            }
         }
     }
 }
