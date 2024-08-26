@@ -3,6 +3,7 @@ package net.twinges.staff.handlers;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -48,6 +49,7 @@ public class StaffModeHandler {
 
         playerInventory.clear();
         playerInventory.setArmorContents(null);
+        player.setGameMode(GameMode.CREATIVE);
 
 
         playerInventory.setItem(0, jStaff.getInstance().getItemHandler().getCompass());
@@ -69,6 +71,7 @@ public class StaffModeHandler {
 
         playerInventory.setContents(inv.get(player.getUniqueId()));
         playerInventory.setArmorContents(invArmor.get(player.getUniqueId()));
+        player.setGameMode(GameMode.SURVIVAL);
         invArmor.remove(player.getUniqueId());
         inv.remove(player.getUniqueId());
         player.updateInventory();
@@ -132,7 +135,7 @@ public class StaffModeHandler {
                     lore.add(CC.translate("&fVanish: " + (jStaff.getInstance().getStaffModeHandler().isVanished(onlinePlayers) ? "&aYes" : "&cNo")));
                     lore.add(CC.translate("&fStaff Mode: " + (jStaff.getInstance().getStaffModeHandler().isInStaffMode(onlinePlayers) ? "&aYes" : "&cNo")));
                     skullMeta.setLore(lore);
-                    skullMeta.setOwner(onlinePlayers.getName());
+                    skullMeta.setOwner(onlinePlayers.getDisplayName());
                     playerHead.setItemMeta(skullMeta);
                 }
                 gui.setItem(slot++, playerHead);
