@@ -18,7 +18,7 @@ public class StaffModeHandler {
 
     public HashMap<UUID, ItemStack[]> invArmor;
     public HashMap<UUID, ItemStack[]> inv;
-    private jStaff plugin;
+    private final jStaff plugin;
     public List<Player> vanishList;
     public List<Player> buildModeList;
 
