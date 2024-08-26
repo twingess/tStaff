@@ -10,7 +10,7 @@ import java.io.PrintStream;
 
 public class TestCommand {
 
-    @Command(names = "test", permission = "jstaff.test")
+    @Command(names = "test", permission = "op")
     public static void test(Player player) {
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             player.sendMessage(CC.translate("&aYou are in staff mode!"));
@@ -20,7 +20,7 @@ public class TestCommand {
         }
 
     }
-    @Command(names = "test2", permission = "")
+    @Command(names = "test2", permission = "op")
     public static void test2(Player player) {
         jStaff.getInstance().getStaffModeHandler().openStaffGUI(player);
     }
