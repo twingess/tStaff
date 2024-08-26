@@ -20,6 +20,7 @@ public class StaffModeHandler {
     public HashMap<UUID, ItemStack[]> inv;
     private jStaff plugin;
     public List<Player> vanishList;
+    public List<Player> buildModeList;
 
 
     public StaffModeHandler(jStaff plugin) {
@@ -27,6 +28,7 @@ public class StaffModeHandler {
         inv = new HashMap<>();
         invArmor = new HashMap<>();
         vanishList = new ArrayList<>();
+        buildModeList = new ArrayList<>();
     }
 
 
@@ -37,6 +39,10 @@ public class StaffModeHandler {
     public boolean isVanished(Player player) {
         return vanishList.contains(player);
 //        return player.hasMetadata("mod");
+    }
+
+    public boolean hasBuildModeEnabled(Player player) {
+        return buildModeList.contains(player);
     }
 
     public void putInStaffMode(Player player) {
@@ -98,6 +104,14 @@ public class StaffModeHandler {
         }
         vanishList.remove(player);
 //        player.removeMetadata("mod", plugin);
+    }
+
+    public void setBuildMode(Player player) {
+        buildModeList.add(player);
+    }
+
+    public void removeBuildMode(Player player) {
+        buildModeList.remove(player);
     }
 
     public Player getRandomPvP() {
