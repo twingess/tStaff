@@ -1,9 +1,7 @@
 package net.twinges.staff.handlers;
 
-import net.md_5.bungee.api.ChatMessageType;
 import net.twinges.staff.util.CC;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
