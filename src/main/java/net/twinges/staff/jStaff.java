@@ -10,6 +10,9 @@ import net.twinges.staff.util.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.ItemList;
+import sun.util.logging.PlatformLogger;
+
+import java.util.logging.Level;
 
 public class jStaff extends JavaPlugin {
 
@@ -25,6 +28,7 @@ public class jStaff extends JavaPlugin {
         registerListeners();
         FrozenCommandHandler.registerAll(this);
         System.out.println(CC.translate("&6jStaff &ahas been enabled."));
+
     }
 
 
