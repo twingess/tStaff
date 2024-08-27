@@ -7,8 +7,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemHandler {
 
-
-
     public ItemStack getCompass() {
         ItemStack itemStack = new ItemStack(Material.COMPASS);
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -56,6 +54,4 @@ public class ItemHandler {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
-
-
 }
