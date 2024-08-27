@@ -17,6 +17,5 @@ public class StaffModeCommand {
             jStaff.getInstance().getStaffModeHandler().putInStaffMode(player);
             player.sendMessage(CC.translate("&aYou have enabled mod mode."));
         }
-
     }
 }
