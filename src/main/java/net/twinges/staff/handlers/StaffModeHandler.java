@@ -47,7 +47,7 @@ public class StaffModeHandler {
     public void putInStaffMode(Player player) {
         PlayerInventory playerInventory = player.getInventory();
         player.setMetadata("mod", new FixedMetadataValue(plugin, player));
-        vanishList.add(player);
+        setVanished(player);
 
         invArmor.put(player.getUniqueId(), playerInventory.getArmorContents());
         inv.put(player.getUniqueId(), playerInventory.getContents());
@@ -81,8 +81,7 @@ public class StaffModeHandler {
         inv.remove(player.getUniqueId());
         player.updateInventory();
         player.removeMetadata("mod", jStaff.getInstance());
-        vanishList.remove(player);
-
+        removeVanish(player);
     }
 
     public void setVanished(Player player) {
