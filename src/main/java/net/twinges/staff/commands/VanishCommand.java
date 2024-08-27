@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 public class VanishCommand {
 
-
     @Command(names = {"v", "vanish"}, permission = "tstaff.vanish")
     public static void vanishCommand(Player player) {
         if (jStaff.getInstance().getStaffModeHandler().isVanished(player)) {
