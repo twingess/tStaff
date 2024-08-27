@@ -38,7 +38,6 @@ public class StaffModeHandler {
 
     public boolean isVanished(Player player) {
         return vanishList.contains(player);
-//        return player.hasMetadata("mod");
     }
 
     public boolean hasBuildModeEnabled(Player player) {
