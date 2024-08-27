@@ -13,9 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class jStaff extends JavaPlugin {
 
-
     @Getter static jStaff instance;
-
     @Getter private StaffModeHandler staffModeHandler;
     @Getter private ItemHandler itemHandler;
 
@@ -25,9 +23,7 @@ public class jStaff extends JavaPlugin {
         registerListeners();
         FrozenCommandHandler.registerAll(this);
         System.out.println(CC.translate("&6jStaff &ahas been enabled."));
-
     }
-
 
     public void onDisable() {
         System.out.println(CC.translate("&6jStaff &ahas been disabled."));
