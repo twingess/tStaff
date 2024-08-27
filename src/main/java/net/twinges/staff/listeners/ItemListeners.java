@@ -14,7 +14,6 @@ import org.bukkit.inventory.Inventory;
 
 public class ItemListeners implements Listener {
 
-
     @EventHandler
     public void onIE(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -63,12 +62,8 @@ public class ItemListeners implements Listener {
         Inventory inventory = event.getInventory();
         String inventoryTitle = inventory.getTitle();
 
-        //Debug #1
-        System.out.println("Clicked inventory " + inventoryTitle);
 
         if (inventoryTitle.equals("Online Staff GUI")) {
-            //Debug #2
-            System.out.println("Preventing interaction.");
             event.setCancelled(true);
         }
     }
