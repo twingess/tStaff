@@ -93,7 +93,6 @@ public class StaffModeHandler {
             }
         }
         vanishList.add(player);
-//        player.setMetadata("invisible", new FixedMetadataValue(plugin, player));
     }
 
     public void removeVanish(Player player) {
@@ -103,7 +102,6 @@ public class StaffModeHandler {
             }
         }
         vanishList.remove(player);
-//        player.removeMetadata("mod", plugin);
     }
 
     public void setBuildMode(Player player) {
