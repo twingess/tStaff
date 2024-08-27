@@ -2,16 +2,27 @@ package net.twinges.staff.listeners;
 
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public class StaffListeners implements Listener {
-
 
 
     @EventHandler
@@ -53,4 +64,45 @@ public class StaffListeners implements Listener {
             event.setCancelled(true);
         }
     }
+
+    @EventHandler
+    public static void onPQE(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        if (player.hasPermission("tstaff.staff")) {
+            if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
+                jStaff.getInstance().getStaffModeHandler().removeStaffMode(player);
+            }
+        }
+    }
+
+    @EventHandler
+    public static void onPJE(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if (player.hasPermission("tstaff.staff")) {
+            if (!jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
+                jStaff.getInstance().getStaffModeHandler().putInStaffMode(player);
+            }
+        }
+    }
+
+    @EventHandler
+    public static void onPIE(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        Block block = event.getClickedBlock();
+
+        if (!jStaff.getInstance().getStaffModeHandler().isVanished(player)) return;
+        if (block == null) return;
+        if (block.getType() != Material.CHEST && block.getType() != Material.TRAPPED_CHEST) return;
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+
+
+        event.setCancelled(true);
+        Chest chest = (Chest) block.getState();
+        Inventory inventory = Bukkit.createInventory(null, chest.getInventory().getSize(), "Silent Open");
+        inventory.setContents(chest.getInventory().getContents());
+        player.openInventory(inventory);
+
+        player.sendMessage(CC.translate("&cOpening chest silently..."));
+    }
 }
+
