@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 public class BuildModeCommand {
 
-
     @Command(names = "buildmode", permission = "tstaff.buildmode")
     public static void buildModeCommand(Player player) {
         if (!jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) {
