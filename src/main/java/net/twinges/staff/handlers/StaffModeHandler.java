@@ -1,5 +1,6 @@
 package net.twinges.staff.handlers;
 
+import net.md_5.bungee.api.ChatMessageType;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
 import org.bukkit.Bukkit;
@@ -67,7 +68,6 @@ public class StaffModeHandler {
         playerInventory.setItem(1, jStaff.getInstance().getItemHandler().getInspectBook());
         playerInventory.setItem(7, jStaff.getInstance().getItemHandler().getStaffGUI());
         playerInventory.setItem(8, jStaff.getInstance().getItemHandler().getRandomTeleport());
-
     }
 
     public void removeStaffMode(Player player) {
@@ -137,13 +137,15 @@ public class StaffModeHandler {
         int slot = 0;
         for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
             if (onlinePlayers.hasPermission("tstaff.staff")) {
-                ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
+                ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
                 SkullMeta skullMeta = (SkullMeta) playerHead.getItemMeta();
                 if (skullMeta != null) {
                     skullMeta.setDisplayName(onlinePlayers.getDisplayName());
                     List<String> lore = new ArrayList<>();
-                    lore.add(CC.translate("&fVanish: " + (jStaff.getInstance().getStaffModeHandler().isVanished(onlinePlayers) ? "&aYes" : "&cNo")));
-                    lore.add(CC.translate("&fStaff Mode: " + (jStaff.getInstance().getStaffModeHandler().isInStaffMode(onlinePlayers) ? "&aYes" : "&cNo")));
+                    lore.add(CC.translate("&7&m------------------"));
+                    lore.add(CC.translate("&6Vanish: " + (jStaff.getInstance().getStaffModeHandler().isVanished(onlinePlayers) ? "&aYes" : "&cNo")));
+                    lore.add(CC.translate("&6Staff Mode: " + (jStaff.getInstance().getStaffModeHandler().isInStaffMode(onlinePlayers) ? "&aYes" : "&cNo")));
+                    lore.add(CC.translate("&7&m------------------"));
                     skullMeta.setLore(lore);
                     skullMeta.setOwner(onlinePlayers.getDisplayName());
                     playerHead.setItemMeta(skullMeta);
