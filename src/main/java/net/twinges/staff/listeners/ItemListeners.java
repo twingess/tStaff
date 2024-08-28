@@ -59,8 +59,14 @@ public class ItemListeners implements Listener {
 
     @EventHandler
     public void onICE(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
         Inventory inventory = event.getInventory();
         String inventoryTitle = inventory.getTitle();
+
+        if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
+            event.setCancelled(true);
+            player.updateInventory();
+        }
 
 
         if (inventoryTitle.equals("Online Staff GUI")) {
