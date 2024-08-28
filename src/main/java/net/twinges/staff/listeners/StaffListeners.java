@@ -13,12 +13,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -104,5 +102,27 @@ public class StaffListeners implements Listener {
 
         player.sendMessage(CC.translate("&cOpening chest silently..."));
     }
+
+    @EventHandler
+    public static void onPDIE(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
+        if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
+            event.setCancelled(true);
+            player.updateInventory();
+        }
+    }
+
+    @EventHandler
+    public static void onEDEE(EntityDamageByEntityEvent event) {
+        Player player = (Player) event.getEntity();
+        if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
+            event.setCancelled(true);
+        }
+        if (jStaff.getInstance().getStaffModeHandler().isVanished(player)) {
+            event.setCancelled(true);
+        }
+    }
+
+
 }
 
