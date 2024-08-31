@@ -68,7 +68,6 @@ public class ItemListeners implements Listener {
             player.updateInventory();
         }
 
-
         if (inventoryTitle.equals("Online Staff GUI")) {
             event.setCancelled(true);
         }
