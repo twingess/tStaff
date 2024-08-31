@@ -1,16 +1,10 @@
 package net.twinges.staff.commands;
 
 import net.frozenorb.qlib.command.Command;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.awt.*;
-
-import static javax.print.attribute.standard.MediaSizeName.C;
 
 public class TestCommand {
 
