@@ -13,7 +13,9 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class StaffModeHandler {
 
@@ -31,6 +33,7 @@ public class StaffModeHandler {
         vanishList = new ArrayList<>();
         buildModeList = new ArrayList<>();
     }
+
 
 
     public boolean isInStaffMode(Player player) {
@@ -111,28 +114,40 @@ public class StaffModeHandler {
     }
 
     public Player getRandomPvP() {
+        //Creating an array players;
         Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[0]);
+        //Doing the random class aka you.
         Random random = new Random();
+        //Initializing the pvpPlayer, we're going to return it!
         Player pvpPlayer = null;
-
+        //Looping through the players in the array.
         for (Player player : players) {
+            //Checking if the players last damage is greater than 0 aka he took damage recently
             if (player.getWorld().getPVP() || player.getLastDamage() > 0) {
-                if (random.nextInt(players.length) < 1) {
+                // Running a random
+                if (random.nextInt(players.length) > 1) {
+                    //Setting pvpPlayer to player;
                     pvpPlayer = player;
                 }
             }
         }
-        return null;
+        return pvpPlayer;
     }
 
     public void openStaffGUI(Player player) {
+        //Initialize Staff Members
         int staffmembers = 0;
+        //Loop through the online players.
         for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
+            //Check if the online players have the permission.
             if (onlinePlayers.hasPermission("tstaff.staff")) {
+                //Do an incrememnt depending on the players that have the permission, basically add a one to the "int staffmembers = 0" for each player that has that permission.
                 staffmembers++;
             }
         }
+        //Initialize a row, we are adding 8 because there is already a slot taken up by a member. And then dividing by 9 so we can count them in rows, not the amount of space we have in a row.
         int rows = (staffmembers + 8) / 9;
+        // Do the GUI, in here, we do the "rows * 9" for the amount of rows we have. Basically doing the size.
         Inventory gui = Bukkit.createInventory(null, rows * 9, "Online Staff GUI");
         int slot = 0;
         for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
