@@ -20,6 +20,7 @@ public class jStaff extends JavaPlugin {
     @Getter private StaffModeHandler staffModeHandler;
     @Getter private ItemHandler itemHandler;
 
+    @Override
     public void onEnable() {
         instance = this;
         registerHandlers();
@@ -29,6 +30,7 @@ public class jStaff extends JavaPlugin {
         getCommand("buildmode").setExecutor(new BuildModeCommand());
     }
 
+    @Override
     public void onDisable() {
 
     }
