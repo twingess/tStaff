@@ -9,17 +9,6 @@ import org.bukkit.entity.Player;
 
 public class VanishCommand implements CommandExecutor {
 
-    //@Command(names = {"v", "vanish"}, permission = "tstaff.vanish")
-    //public static void vanishCommand(Player player) {
-    //    if (jStaff.getInstance().getStaffModeHandler().isVanished(player)) {
-    //        player.sendMessage(CC.translate("&cDisabled Vanish."));
-    //        jStaff.getInstance().getStaffModeHandler().removeVanish(player);
-    //    } else {
-    //        player.sendMessage(CC.translate("&aEnabled Vanish."));
-    //        jStaff.getInstance().getStaffModeHandler().setVanished(player);
-    //    }
-    //}
-
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
 
