@@ -24,18 +24,16 @@ public class jStaff extends JavaPlugin {
         instance = this;
         registerHandlers();
         registerListeners();
-        FrozenCommandHandler.registerAll(this);
-        System.out.println(CC.translate("&6jStaff &ahas been enabled."));
         getCommand("vanish").setExecutor(new VanishCommand());
         getCommand("staffmode").setExecutor(new StaffModeCommand());
         getCommand("buildmode").setExecutor(new BuildModeCommand());
     }
 
     public void onDisable() {
-        System.out.println(CC.translate("&6jStaff &ahas been disabled."));
+
     }
 
-    private void registerHandlers(){
+    private void registerHandlers() {
         staffModeHandler = new StaffModeHandler(this);
         itemHandler = new ItemHandler();
     }
