@@ -41,7 +41,7 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onICE(InventoryClickEvent event) {
+    public void onICE(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (player.hasPermission("tstaff.admin")) return;
         if (event.getWhoClicked() instanceof Player) {
@@ -53,7 +53,7 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onPGMCE(PlayerGameModeChangeEvent event) {
+    public void onPGMCE(PlayerGameModeChangeEvent event) {
         Player player = event.getPlayer();
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             event.setCancelled(true);
@@ -61,7 +61,7 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onPQE(PlayerQuitEvent event) {
+    public void onPQE(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         if (player.hasPermission("tstaff.staff")) {
             if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
@@ -71,7 +71,7 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onPJE(PlayerJoinEvent event) {
+    public void onPJE(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (player.hasPermission("tstaff.staff")) {
             if (!jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
@@ -81,7 +81,7 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onPIE(PlayerInteractEvent event) {
+    public void onPIE(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
 
@@ -101,7 +101,7 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onPDIE(PlayerDropItemEvent event) {
+    public void onPDIE(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             event.setCancelled(true);
@@ -110,7 +110,7 @@ public class StaffListeners implements Listener {
     }
 
     @EventHandler
-    public static void onEDEE(EntityDamageByEntityEvent event) {
+    public void onEDEE(EntityDamageByEntityEvent event) {
         Player player = (Player) event.getEntity();
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             event.setCancelled(true);
