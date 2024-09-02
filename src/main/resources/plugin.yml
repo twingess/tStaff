@@ -3,3 +3,14 @@ version: 1.0
 author: Twinges
 main: net.twinges.staff.jStaff
 softdepend: [ qLib ]
+commands:
+  buildmode:
+  staffmode:
+    aliases:
+      - h
+      - mod
+      - modmode
+      - staff
+  vanish:
+    aliases:
+      - v
