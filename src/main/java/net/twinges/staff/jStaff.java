@@ -2,6 +2,9 @@ package net.twinges.staff;
 
 import lombok.Getter;
 import net.frozenorb.qlib.command.FrozenCommandHandler;
+import net.twinges.staff.commands.BuildModeCommand;
+import net.twinges.staff.commands.StaffModeCommand;
+import net.twinges.staff.commands.VanishCommand;
 import net.twinges.staff.handlers.ItemHandler;
 import net.twinges.staff.handlers.StaffModeHandler;
 import net.twinges.staff.listeners.ItemListeners;
@@ -23,6 +26,9 @@ public class jStaff extends JavaPlugin {
         registerListeners();
         FrozenCommandHandler.registerAll(this);
         System.out.println(CC.translate("&6jStaff &ahas been enabled."));
+        getCommand("vanish").setExecutor(new VanishCommand());
+        getCommand("staffmode").setExecutor(new StaffModeCommand());
+        getCommand("buildmode").setExecutor(new BuildModeCommand());
     }
 
     public void onDisable() {
