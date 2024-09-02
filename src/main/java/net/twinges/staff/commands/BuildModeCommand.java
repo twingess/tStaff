@@ -9,17 +9,6 @@ import org.bukkit.entity.Player;
 
 public class BuildModeCommand implements CommandExecutor {
 
-    @Command(names = "buildmode", permission = "tstaff.buildmode")
-    public static void buildModeCommand(Player player) {
-        if (!jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) {
-            jStaff.getInstance().getStaffModeHandler().setBuildMode(player);
-            player.sendMessage(CC.translate("&aYou have enabled build mode."));
-        } else {
-            jStaff.getInstance().getStaffModeHandler().removeBuildMode(player);
-            player.sendMessage(CC.translate("&cYou have disabled build mode."));
-        }
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if (sender instanceof Player player) {
