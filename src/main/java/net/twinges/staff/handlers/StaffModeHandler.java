@@ -1,5 +1,6 @@
 package net.twinges.staff.handlers;
 
+import com.avaje.ebean.validation.NotNull;
 import net.md_5.bungee.api.ChatMessageType;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.plugin.Plugin;
 
 import java.awt.*;
 import java.util.*;
@@ -22,16 +24,12 @@ public class StaffModeHandler {
     public HashMap<UUID, ItemStack[]> invArmor;
     public HashMap<UUID, ItemStack[]> inv;
     private final jStaff plugin;
-    public List<Player> vanishList;
-    public List<Player> buildModeList;
 
 
     public StaffModeHandler(jStaff plugin) {
         this.plugin = plugin;
         inv = new HashMap<>();
         invArmor = new HashMap<>();
-        vanishList = new ArrayList<>();
-        buildModeList = new ArrayList<>();
     }
 
 
@@ -41,11 +39,11 @@ public class StaffModeHandler {
     }
 
     public boolean isVanished(Player player) {
-        return vanishList.contains(player);
+        return player.hasMetadata("vanish");
     }
 
     public boolean hasBuildModeEnabled(Player player) {
-        return buildModeList.contains(player);
+        return player.hasMetadata("buildmode");
     }
 
     public void putInStaffMode(Player player) {
@@ -93,7 +91,7 @@ public class StaffModeHandler {
                 player.hidePlayer(players);
             }
         }
-        vanishList.add(player);
+        player.setMetadata("vanish", new FixedMetadataValue(plugin, player));
     }
 
     public void removeVanish(Player player) {
@@ -102,15 +100,15 @@ public class StaffModeHandler {
                 player.showPlayer(players);
             }
         }
-        vanishList.remove(player);
+        player.removeMetadata("vanish", plugin);
     }
 
     public void setBuildMode(Player player) {
-        buildModeList.add(player);
+        player.setMetadata("buildmode", new FixedMetadataValue(plugin, player));
     }
 
     public void removeBuildMode(Player player) {
-        buildModeList.remove(player);
+        player.removeMetadata("buildmode", plugin);
     }
 
     public Player getRandomPvP() {
