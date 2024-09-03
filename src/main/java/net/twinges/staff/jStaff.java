@@ -1,7 +1,6 @@
 package net.twinges.staff;
 
 import lombok.Getter;
-import net.frozenorb.qlib.command.FrozenCommandHandler;
 import net.twinges.staff.commands.BuildModeCommand;
 import net.twinges.staff.commands.StaffModeCommand;
 import net.twinges.staff.commands.VanishCommand;
