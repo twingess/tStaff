@@ -1,6 +1,5 @@
 package net.twinges.staff.commands;
 
-import net.frozenorb.qlib.command.Command;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
 import org.bukkit.command.CommandExecutor;
