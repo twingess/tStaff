@@ -112,7 +112,7 @@ public class StaffModeHandler {
     }
 
     public Player getRandomPvP() {
-        //Creating an array players;
+        //Creating an array of players;
         Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[0]);
         //Doing the random class aka you.
         Random random = new Random();
