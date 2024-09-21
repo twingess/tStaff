@@ -10,18 +10,26 @@ public class BuildModeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
-        if (sender instanceof Player player) {
-            if (!jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) {
-                jStaff.getInstance().getStaffModeHandler().setBuildMode(player);
-                player.sendMessage(CC.translate("&aYou have enabled build mode"));
-            } else {
-                jStaff.getInstance().getStaffModeHandler().removeBuildMode(player);
-                player.sendMessage(CC.translate("&cYou have disabled build mode."));
-            }
-        } else {
-            sender.sendMessage(CC.translate("&cYou must be a player to execute this command."));
+
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(CC.translate("&cYou must be a player to execute this command!"));
+            return false;
+        }
+        Player player = (Player) sender;
+        if (!player.hasPermission("tstaff.buildmode")) {
+            player.sendMessage(CC.translate("&cNo permission."));
+            return false;
         }
 
+
+
+        if (!jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) {
+            jStaff.getInstance().getStaffModeHandler().setBuildMode(player);
+            player.sendMessage(CC.translate("&aYou have enabled build mode"));
+        } else {
+            jStaff.getInstance().getStaffModeHandler().removeBuildMode(player);
+            player.sendMessage(CC.translate("&cYou have disabled build mode."));
+        }
 
 
         return false;
