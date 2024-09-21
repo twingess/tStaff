@@ -13,3 +13,9 @@ commands:
   vanish:
     aliases:
       - v
+  staffchat:
+    aliases:
+      - sc
+  staffbroadcast:
+    aliases:
+      - staffbc
