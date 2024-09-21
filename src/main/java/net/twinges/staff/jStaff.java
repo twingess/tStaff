@@ -1,9 +1,7 @@
 package net.twinges.staff;
 
 import lombok.Getter;
-import net.twinges.staff.commands.BuildModeCommand;
-import net.twinges.staff.commands.StaffModeCommand;
-import net.twinges.staff.commands.VanishCommand;
+import net.twinges.staff.commands.*;
 import net.twinges.staff.handlers.ItemHandler;
 import net.twinges.staff.handlers.StaffModeHandler;
 import net.twinges.staff.listeners.ItemListeners;
@@ -27,6 +25,8 @@ public class jStaff extends JavaPlugin {
         getCommand("vanish").setExecutor(new VanishCommand());
         getCommand("staffmode").setExecutor(new StaffModeCommand());
         getCommand("buildmode").setExecutor(new BuildModeCommand());
+        getCommand("staffchat").setExecutor(new StaffChatCommand());
+        getCommand("staffbroadcast").setExecutor(new StaffBroadcastCommand());
     }
 
     @Override
