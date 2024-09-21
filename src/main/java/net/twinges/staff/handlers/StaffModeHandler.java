@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -21,9 +22,10 @@ import java.util.List;
 
 public class StaffModeHandler {
 
-    public HashMap<UUID, ItemStack[]> invArmor;
-    public HashMap<UUID, ItemStack[]> inv;
+    private HashMap<UUID, ItemStack[]> invArmor;
+    private HashMap<UUID, ItemStack[]> inv;
     private final jStaff plugin;
+    private List<UUID> staffChatList = new ArrayList<>();
 
 
     public StaffModeHandler(jStaff plugin) {
@@ -168,4 +170,19 @@ public class StaffModeHandler {
         }
         player.openInventory(gui);
     }
+
+    public void putInStaffChat(Player player) {
+        staffChatList.add(player.getUniqueId());
+    }
+
+    public void removeStaffChat(Player player) {
+        staffChatList.remove(player.getUniqueId());
+    }
+
+    public boolean isInStaffChat(Player player) {
+        return staffChatList.contains(player.getUniqueId());
+    }
+
+
+
 }
