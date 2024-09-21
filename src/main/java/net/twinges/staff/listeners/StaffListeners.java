@@ -128,6 +128,19 @@ public class StaffListeners implements Listener {
         }
     }
 
+    @EventHandler
+    public void onAPCE(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        if (jStaff.getInstance().getStaffModeHandler().isInStaffChat(player)) {
+            event.setCancelled(true);
+            for (Player players : Bukkit.getOnlinePlayers()) {
+                if (players.hasPermission("tstaff.staff")) {
+                    players.sendMessage(CC.translate("&9[SC] &a" + event.getPlayer().getName() + "&f: " + event.getMessage()));
+                }
+            }
+        }
+
+    }
 
 
 }
