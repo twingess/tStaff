@@ -1,5 +1,6 @@
 package net.twinges.staff.listeners;
 
+import net.twinges.staff.handlers.StaffModeHandler;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
 import org.bukkit.Bukkit;
@@ -111,14 +112,22 @@ public class StaffListeners implements Listener {
 
     @EventHandler
     public void onEDEE(EntityDamageByEntityEvent event) {
-        Player player = (Player) event.getEntity();
-        if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
+        Player damager = (Player) event.getDamager();
+        if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(damager) || jStaff.getInstance().getStaffModeHandler().isVanished(damager)) {
             event.setCancelled(true);
+            damager.sendMessage(CC.translate("&cYou cannot hit entities while in staff mode!"));
         }
-        if (jStaff.getInstance().getStaffModeHandler().isVanished(player)) {
+    }
+
+
+    @EventHandler
+    public void onIPE(PlayerPickupItemEvent event) {
+        Player player = event.getPlayer();
+        if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player) || jStaff.getInstance().getStaffModeHandler().isVanished(player)) {
             event.setCancelled(true);
         }
     }
+
 
 
 }
