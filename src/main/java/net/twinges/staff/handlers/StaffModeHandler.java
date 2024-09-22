@@ -1,6 +1,5 @@
 package net.twinges.staff.handlers;
 
-import com.avaje.ebean.validation.NotNull;
 import net.md_5.bungee.api.ChatMessageType;
 import net.twinges.staff.jStaff;
 import net.twinges.staff.util.CC;
@@ -15,6 +14,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.*;
@@ -181,6 +181,20 @@ public class StaffModeHandler {
 
     public boolean isInStaffChat(Player player) {
         return staffChatList.contains(player.getUniqueId());
+    }
+
+
+
+    public void freezePlayer(Player player) {
+        player.setMetadata("frozen", new FixedMetadataValue(plugin, player));
+    }
+
+    public void unFreezePlayer(Player player) {
+        player.removeMetadata("frozen", plugin);
+    }
+
+    public boolean isFrozen(Player player) {
+        return player.hasMetadata("frozen");
     }
 
 
