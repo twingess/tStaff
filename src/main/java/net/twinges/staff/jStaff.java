@@ -27,6 +27,8 @@ public class jStaff extends JavaPlugin {
         getCommand("buildmode").setExecutor(new BuildModeCommand());
         getCommand("staffchat").setExecutor(new StaffChatCommand());
         getCommand("staffbroadcast").setExecutor(new StaffBroadcastCommand());
+        getCommand("freeze").setExecutor(new FreezeCommand());
+        getCommand("unfreeze").setExecutor(new UnFreezeCommand());
     }
 
     @Override
