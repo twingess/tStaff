@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class jStaff extends JavaPlugin {
 
-    @Getter static jStaff instance;
+    @Getter public static jStaff instance;
     @Getter private StaffModeHandler staffModeHandler;
     @Getter private ItemHandler itemHandler;
 
@@ -22,13 +22,7 @@ public class jStaff extends JavaPlugin {
         instance = this;
         registerHandlers();
         registerListeners();
-        getCommand("vanish").setExecutor(new VanishCommand());
-        getCommand("staffmode").setExecutor(new StaffModeCommand());
-        getCommand("buildmode").setExecutor(new BuildModeCommand());
-        getCommand("staffchat").setExecutor(new StaffChatCommand());
-        getCommand("staffbroadcast").setExecutor(new StaffBroadcastCommand());
-        getCommand("freeze").setExecutor(new FreezeCommand());
-        getCommand("unfreeze").setExecutor(new UnFreezeCommand());
+        registerCommands();
     }
 
     @Override
@@ -43,5 +37,15 @@ public class jStaff extends JavaPlugin {
     private void registerListeners() {
         Bukkit.getServer().getPluginManager().registerEvents(new StaffListeners(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new ItemListeners(), this);
+    }
+
+    private void registerCommands() {
+        getCommand("vanish").setExecutor(new VanishCommand());
+        getCommand("staffmode").setExecutor(new StaffModeCommand());
+        getCommand("buildmode").setExecutor(new BuildModeCommand());
+        getCommand("staffchat").setExecutor(new StaffChatCommand());
+        getCommand("staffbroadcast").setExecutor(new StaffBroadcastCommand());
+        getCommand("freeze").setExecutor(new FreezeCommand());
+        getCommand("unfreeze").setExecutor(new UnFreezeCommand());
     }
 }
