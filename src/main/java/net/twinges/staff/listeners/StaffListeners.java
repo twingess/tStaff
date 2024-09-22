@@ -24,16 +24,19 @@ public class StaffListeners implements Listener {
     @EventHandler
     public void onBBE(BlockBreakEvent event) {
         Player player = event.getPlayer();
+        if (jStaff.getInstance().getStaffModeHandler().isFrozen(player)) return;
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             if (jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) return;
             event.setCancelled(true);
             player.sendMessage(CC.translate("&cYou cannot break blocks while in staff mode."));
         }
+
     }
 
     @EventHandler
     public void onBPE(BlockPlaceEvent event) {
         Player player = event.getPlayer();
+        if (jStaff.getInstance().getStaffModeHandler().isFrozen(player)) return;
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
             if (jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) return;
             event.setCancelled(true);
@@ -44,6 +47,7 @@ public class StaffListeners implements Listener {
     @EventHandler
     public void onICE(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
+        if (jStaff.getInstance().getStaffModeHandler().isFrozen(player)) return;
         if (player.hasPermission("tstaff.admin")) return;
         if (event.getWhoClicked() instanceof Player) {
             if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(player)) {
@@ -90,6 +94,7 @@ public class StaffListeners implements Listener {
         if (block == null) return;
         if (block.getType() != Material.CHEST && block.getType() != Material.TRAPPED_CHEST) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if (jStaff.getInstance().getStaffModeHandler().isFrozen(player)) return;
 
 
         event.setCancelled(true);
@@ -113,9 +118,17 @@ public class StaffListeners implements Listener {
     @EventHandler
     public void onEDEE(EntityDamageByEntityEvent event) {
         Player damager = (Player) event.getDamager();
+        Player entity = (Player) event.getEntity();
         if (jStaff.getInstance().getStaffModeHandler().isInStaffMode(damager) || jStaff.getInstance().getStaffModeHandler().isVanished(damager)) {
             event.setCancelled(true);
             damager.sendMessage(CC.translate("&cYou cannot hit entities while in staff mode!"));
+        }
+        if (jStaff.getInstance().getStaffModeHandler().isFrozen(damager)) {
+            event.setCancelled(true);
+        }
+        if (jStaff.getInstance().getStaffModeHandler().isFrozen(entity)) {
+            event.setCancelled(true);
+            damager.sendMessage(CC.translate("&c" + entity.getName() + " is currently frozen!"));
         }
     }
 
@@ -139,7 +152,17 @@ public class StaffListeners implements Listener {
                 }
             }
         }
+        if (jStaff.getInstance().getStaffModeHandler().isFrozen(player)) {
+            event.setCancelled(true);
+        }
+    }
 
+    @EventHandler
+    public void onPME(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        if (jStaff.getInstance().getStaffModeHandler().isFrozen(player)) {
+            event.setCancelled(true);
+        }
     }
 
 
