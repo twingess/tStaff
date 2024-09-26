@@ -21,8 +21,6 @@ public class BuildModeCommand implements CommandExecutor {
             return false;
         }
 
-
-
         if (!jStaff.getInstance().getStaffModeHandler().hasBuildModeEnabled(player)) {
             jStaff.getInstance().getStaffModeHandler().setBuildMode(player);
             player.sendMessage(CC.translate("&aYou have enabled build mode"));
