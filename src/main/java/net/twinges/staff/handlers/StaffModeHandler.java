@@ -22,16 +22,14 @@ import java.util.List;
 
 public class StaffModeHandler {
 
-    private HashMap<UUID, ItemStack[]> invArmor;
-    private HashMap<UUID, ItemStack[]> inv;
+    private HashMap<UUID, ItemStack[]> invArmor = new HashMap<>();
+    private HashMap<UUID, ItemStack[]> inv = new HashMap<>();
     private final jStaff plugin;
     private List<UUID> staffChatList = new ArrayList<>();
 
 
     public StaffModeHandler(jStaff plugin) {
         this.plugin = plugin;
-        inv = new HashMap<>();
-        invArmor = new HashMap<>();
     }
 
 
