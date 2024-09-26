@@ -19,8 +19,10 @@ public class FreezeCommand implements CommandExecutor {
             sender.sendMessage(CC.translate("&cYou must be a player to execute this command!"));
             return false;
         }
+
         Player player = (Player) sender;
         Player target = Bukkit.getPlayer(args[0]);
+
         if (!player.hasPermission("tstaff.freeze")) {
             player.sendMessage(CC.translate("&cNo permission."));
             return false;
